@@ -1,10 +1,6 @@
-# DP2 analyses of the DESC LBG TT
+# Getting Started
 
-Repo for sharing code related to the LBG TT's DP2 analyses
-
-Location on NERSC: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-dp2`.
-
-## Setup:
+## Environment setup
 
 First setup the `lbg-env` tool by adding the following to your `~/.bashrc.ext` (or `~/.zshrc.ext`):
 
@@ -18,12 +14,21 @@ You now have access to the `lbg-env` tool.
 Typing `lbg` in the terminal now provides a shortcut to the LBG project directory, and typing `lbg-env` will activate the latest shared LBG TT python environment.
 You can type `lbg-env help` to see other options provided by this tool, or you can see the README in the [lbg-env GitHub repo](https://github.com/LSSTDESC/lbg-env).
 
-## Running the pipelines
+## Running a pipeline
 
-Here's an example of how you might run a pipeline in an interactive debug node.
-After logging onto NERSC, from the root of the LBG DP2 repo, run
+The simplest way to run a pipeline is with `run_debug.sh`, which requests a
+short debug allocation automatically and runs the pipeline inside it:
+
 ```bash
 bash scripts/run_debug.sh <pipeline> <run>
 ```
 
-See the [Pipelines](docs/pipelines/index.md) doc for the full description of pipelines, run configs, and the available run scripts.
+where `<pipeline>` is the name of a directory under `configs/pipelines/` and
+`<run>` is the name of a file (without the `.yml` extension) under `configs/runs/`.
+
+See [Pipelines](pipelines/index.md) for a full description of each pipeline and instructions
+for creating run configs.
+
+## Contributing
+
+To contribute to this project, see the instructions in [Contributing](contributing.md)

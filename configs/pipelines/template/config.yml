@@ -1,0 +1,8 @@
+# Fake config for the template pipeline — copy this directory to pipelines/<name>/
+
+Stage1:
+  param1: 1
+  param2: /path/to/calibration/file.dat
+
+Stage2:
+  param1: False

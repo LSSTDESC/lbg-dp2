@@ -1,0 +1,15 @@
+# Template run config — copy to runs/<name>.yml and fill in the details.
+
+resume: False  # Whether to re-run stages whose outputs already exist
+
+# Location where outputs are saved - REPLACE <run> with the name of the run!
+output_dir: results/<run>/outputs
+log_dir: results/<run>/logs
+
+# Inputs required to run the stages in the pipeline
+inputs:
+  fiducial_cosmology: configs/fiducial_cosmology.yml
+
+# These will be run before and after the pipeline respectively
+pre_script: ""
+post_script: ""

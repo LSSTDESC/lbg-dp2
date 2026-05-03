@@ -1,0 +1,50 @@
+site_name: LBG-DP2
+site_description: DESC LBG topical team — DP2 analysis pipelines and results
+repo_url: https://github.com/LSSTDESC/LBG-DP2
+repo_name: LSSTDESC/LBG-DP2
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - footnotes
+  - attr_list
+  - pymdownx.snippets:
+      base_path: [.]
+
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Pipelines: pipelines/index.md
+  - Notebooks: notebooks.md
+  - Data: data.md
+  - Contributing: contributing.md

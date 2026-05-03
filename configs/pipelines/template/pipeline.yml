@@ -1,0 +1,13 @@
+# Template pipeline — copy this directory to pipelines/<name>/
+
+python_paths:
+  - stages # Relative path to our custom stages
+
+# Config file for this pipeline
+config: configs/pipelines/template/config.yml
+
+# Define all the stages
+# Ceci will use their inputs/outputs to figure out in which order to run them
+stages:
+  - name: Stage1
+  - name: Stage2
