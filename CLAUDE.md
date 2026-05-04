@@ -55,19 +55,20 @@ lbg-env
 Then:
 
 ```bash
-bash scripts/run_debug.sh    <pipeline> <run>   # quick test
-bash scripts/run_interactive.sh <pipeline> <run> # inside salloc
-sbatch scripts/run_batch.sh  <pipeline> <run>   # production
+bash scripts/run_debug.sh    <run>   # quick test
+bash scripts/run_interactive.sh <run> # inside salloc
+sbatch scripts/run_batch.sh  <run>   # production
 ```
 
-`<pipeline>` = directory name under `configs/pipelines/`.
 `<run>` = filename (no `.yml`) under `configs/runs/`.
+The pipeline(s) to run are specified by the `pipelines:` key inside the run config.
 ceci must be invoked from the repo root (the scripts handle this).
 
 ## ceci version notes
 
 The installed ceci version accepts only a **single** pipeline YAML (plus `key=value` overrides).
-The run scripts work around this by merging `pipeline.yml`, the run config, and the site config into a temp file before calling ceci.
+The run scripts work around this by merging all pipeline YAMLs, the run config, and the site config into a temp file before calling ceci.
+`merge_configs.py` reads the `pipelines:` key from the run config, loads each named pipeline from `configs/pipelines/<name>/pipeline.yml`, and merges their `modules`, `stages`, and per-stage configs.
 Use `modules:` (space-separated, top-level key) to import stage modules — this is what registers stage classes with ceci.
 `python_paths:` is not needed because ceci adds CWD to `sys.path` automatically.
 
@@ -96,6 +97,7 @@ AnotherStage:
 **run config** skeleton:
 ```yaml
 resume: False
+pipelines: <pipeline-name>   # or a list of names
 output_dir: results/<run>/outputs
 log_dir: results/<run>/logs
 inputs:

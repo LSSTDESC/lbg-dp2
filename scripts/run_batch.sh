@@ -4,7 +4,7 @@
 # when nodes are available; you do not need to stay logged in.
 #
 # Usage:
-#   sbatch scripts/run_batch.sh <pipeline> <run>
+#   sbatch scripts/run_batch.sh <run> [ceci-args...]
 #
 # Adjust the #SBATCH options below before submitting.
 
@@ -35,5 +35,5 @@
 # shellcheck source=_common.sh
 source "$(dirname "$0")/_common.sh"
 
-MERGED=$(python3 scripts/merge_configs.py "$PIPELINE_YAML" "$RUN_YAML" configs/sites/nersc-batch.yml)
-ceci "$MERGED"
+MERGED=$(python3 scripts/merge_configs.py "$RUN_YAML" configs/sites/nersc-batch.yml)
+ceci "$MERGED" "${@:2}"

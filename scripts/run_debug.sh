@@ -4,7 +4,7 @@
 # but limited to 30 minutes and 2 nodes.
 #
 # Usage (run from a login node — no salloc needed beforehand):
-#   bash scripts/run_debug.sh <pipeline> <run>
+#   bash scripts/run_debug.sh <run> [ceci-args...]
 
 # shellcheck source=_common.sh
 source "$(dirname "$0")/_common.sh"
@@ -17,4 +17,4 @@ salloc \
     --account m1727 \
     --qos debug \
     --constraint cpu \
-    bash scripts/run_interactive.sh "$PIPELINE" "$RUN"
+    bash scripts/run_interactive.sh "$RUN" "${@:2}"

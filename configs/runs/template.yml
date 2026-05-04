@@ -2,6 +2,13 @@
 
 resume: False  # Whether to re-run stages whose outputs already exist
 
+# Name of pipeline file to insert into this run yaml
+pipelines: template
+# Can also be a list, e.g.
+# pipelines:
+#   pipeline1
+#   pipeline2
+
 # Location where outputs are saved - REPLACE <run> with the name of the run!
 output_dir: results/<run>/outputs
 log_dir: results/<run>/logs

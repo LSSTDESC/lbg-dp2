@@ -2,6 +2,8 @@
 
 resume: False
 
+pipelines: reduce_flagship_catalog
+
 output_dir: results/reduce_flagship_catalog/outputs
 log_dir: results/reduce_flagship_catalog/logs
 

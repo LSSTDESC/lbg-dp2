@@ -20,11 +20,11 @@ The simplest way to run a pipeline is with `run_debug.sh`, which requests a
 short debug allocation automatically and runs the pipeline inside it:
 
 ```bash
-bash scripts/run_debug.sh <pipeline> <run>
+bash scripts/run_debug.sh <run>
 ```
 
-where `<pipeline>` is the name of a directory under `configs/pipelines/` and
-`<run>` is the name of a file (without the `.yml` extension) under `configs/runs/`.
+where `<run>` is the name of a file (without the `.yml` extension) under `configs/runs/`.
+The pipeline(s) to execute are specified by the `pipelines:` key inside that run config.
 
 See [Pipelines](pipelines/index.md) for a full description of each pipeline and instructions
 for creating run configs.

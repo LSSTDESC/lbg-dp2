@@ -19,12 +19,13 @@ configs/
     └── nersc-batch.yml         # launcher settings for sbatch jobs
 ```
 
-A pipeline run is configured by two files:
+A pipeline run is configured by two kinds of file:
 
-- a **pipeline** directory under `configs/pipelines/` that defines the stage DAG and their parameters, and
-- a **run** file under `configs/runs/` that specifies inputs, output locations, and run options.
+- one or more **pipeline** directories under `configs/pipelines/`, each defining a stage DAG and per-stage parameters, and
+- a **run** file under `configs/runs/` that names which pipeline(s) to run and specifies inputs, output locations, and run options.
 
-In other words, the pipeline configs are meant to be relatively agnostic to the catalogs you're putting into them, which allows us to use run configs to rerun the same pipeline on many different inputs.
+The pipeline configs are kept agnostic to the specific catalogs being analysed, so the same pipeline can be rerun on different inputs simply by writing a new run config.
+A run config can also compose multiple pipelines by listing them under the `pipelines:` key — their stages, modules, and per-stage configs are merged automatically.
 
 ## Pipeline configs
 
@@ -61,6 +62,12 @@ Each file in `configs/runs/` defines one run:
 
 resume: False  # Whether to re-run stages whose outputs already exist
 
+# Pipeline(s) to run. Use a single name or a list.
+pipelines: <pipeline-name>
+# pipelines:
+#   - pipeline1
+#   - pipeline2
+
 # Location where outputs are saved - REPLACE <run> with the name of the run!
 output_dir: results/<run>/outputs
 log_dir: results/<run>/logs
@@ -78,28 +85,28 @@ post_script: ""
 ## Running a pipeline
 
 Three run scripts are provided in `scripts/`.
-Each takes a pipeline name and a run name as arguments.
+Each takes a run name as its first argument; the pipeline(s) to execute are read from the `pipelines:` key in the run config.
+Any additional arguments are forwarded directly to `ceci`.
 
 **Quick test** (requests a 2-node debug allocation automatically):
 
 ```bash
-bash scripts/run_debug.sh <pipeline> <run>
+bash scripts/run_debug.sh <run> [ceci-args...]
 ```
 
 **Interactive** (use when you already have an `salloc` allocation):
 
 ```bash
-bash scripts/run_interactive.sh <pipeline> <run>
+bash scripts/run_interactive.sh <run> [ceci-args...]
 ```
 
 **Batch job** (queues a Slurm job; you do not need to stay logged in):
 
 ```bash
-sbatch scripts/run_batch.sh <pipeline> <run>
+sbatch scripts/run_batch.sh <run> [ceci-args...]
 ```
 
-In all cases `<pipeline>` is the name of a directory under `configs/pipelines/`
-and `<run>` is the name of a `.yml` file (without the extension) under `configs/runs/`.
+In all cases `<run>` is the name of a `.yml` file (without the extension) under `configs/runs/`.
 
 ## Adding a new pipeline
 
@@ -117,11 +124,11 @@ and `<run>` is the name of a `.yml` file (without the extension) under `configs/
 1. Choose a descriptive run name.
 Something like `<pipeline>_<catalog>` is a good option, e.g. `clustering_dp2_24p5`.
 
-2. Copy the run template and fill in the inputs and output paths:
+2. Copy the run template and fill in the pipeline(s), inputs, and output paths:
 
     ```bash
     cp configs/runs/template.yml configs/runs/<run_name>.yml
-    # edit output_dir, log_dir, and inputs:
+    # edit pipelines:, output_dir, log_dir, and inputs:
     ```
 
 3. Add an entry to the [list of runs](../configs/runs/README.md) that documents the run, including inputs, software versions, and science intent.
