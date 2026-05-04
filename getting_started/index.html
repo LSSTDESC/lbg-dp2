@@ -652,10 +652,10 @@ You can type <code>lbg-env help</code> to see other options provided by this too
 <h2 id="running-a-pipeline">Running a pipeline</h2>
 <p>The simplest way to run a pipeline is with <code>run_debug.sh</code>, which requests a
 short debug allocation automatically and runs the pipeline inside it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;run&gt;
 </code></pre></div>
-<p>where <code>&lt;pipeline&gt;</code> is the name of a directory under <code>configs/pipelines/</code> and
-<code>&lt;run&gt;</code> is the name of a file (without the <code>.yml</code> extension) under <code>configs/runs/</code>.</p>
+<p>where <code>&lt;run&gt;</code> is the name of a file (without the <code>.yml</code> extension) under <code>configs/runs/</code>.
+The pipeline(s) to execute are specified by the <code>pipelines:</code> key inside that run config.</p>
 <p>See <a href="pipelines/index.md">Pipelines</a> for a full description of each pipeline and instructions
 for creating run configs.</p>
 <h2 id="contributing">Contributing</h2>
