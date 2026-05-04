@@ -1,5 +1,5 @@
 # ruff: noqa
-# Ceci requires this file with these contents
+from ceci import PipelineStage
 from . import *
 
 if __name__ == "__main__":

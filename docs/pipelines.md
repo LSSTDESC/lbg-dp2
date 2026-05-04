@@ -24,22 +24,53 @@ A pipeline run is configured by two files:
 - a **pipeline** directory under `configs/pipelines/` that defines the stage DAG and their parameters, and
 - a **run** file under `configs/runs/` that specifies inputs, output locations, and run options.
 
-Keeping these separate means you can rerun the same pipeline on different inputs (or vice versa).
+In other words, the pipeline configs are meant to be relatively agnostic to the catalogs you're putting into them, which allows us to use run configs to rerun the same pipeline on many different inputs.
+
+## Pipeline configs
+
+[List of pipelines](../configs/pipelines/README.md)
+
+Each file in `configs/pipelines/` defines one pipeline:
+
+```yaml
+# Template pipeline — copy this directory to pipelines/<name>/
+
+# Space-separated list of modules to import so ceci can find the stage classes.
+# Default is just our lbg_stages module, but another common one is txpipe
+modules: lbg_stages
+
+# Config file for this pipeline
+config: configs/pipelines/template/config.yml
+
+# Define all the stages.
+# Ceci will use their inputs/outputs to figure out in which order to run them.
+stages:
+  - name: Stage1
+  - name: Stage2
+  # Add more stages here
+```
 
 ## Run configs
+
+[List of runs](../configs/runs/README.md)
 
 Each file in `configs/runs/` defines one run:
 
 ```yaml
-resume: false
+# Template run config — copy to runs/<name>.yml and fill in the details.
 
+resume: False  # Whether to re-run stages whose outputs already exist
+
+# Location where outputs are saved - REPLACE <run> with the name of the run!
 output_dir: results/<run>/outputs
 log_dir: results/<run>/logs
 
+# Inputs required to run the stages in the pipeline
 inputs:
   fiducial_cosmology: configs/fiducial_cosmology.yml
-  # add further inputs here
+  # Add more inputs here
 
+# These will be run before and after the pipeline respectively
 pre_script: ""
 post_script: ""
 ```
@@ -79,7 +110,7 @@ and `<run>` is the name of a `.yml` file (without the extension) under `configs/
     # edit configs/pipelines/<pipeline_name>/pipeline.yml and config.yml
     ```
 
-2. Create a doc page to document the pipeline, including the science intent.
+2. Add an entry to the [list of pipelines](../configs/pipelines/README.md) that documents the pipeline, including the science intent.
 
 ## Adding a new run
 
@@ -93,4 +124,4 @@ Something like `<pipeline>_<catalog>` is a good option, e.g. `clustering_dp2_24p
     # edit output_dir, log_dir, and inputs:
     ```
 
-3. Create a doc page to document the run, including inputs, software versions, and science intent.
+3. Add an entry to the [list of runs](../configs/runs/README.md) that documents the run, including inputs, software versions, and science intent.

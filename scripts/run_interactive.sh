@@ -11,4 +11,5 @@
 # shellcheck source=_common.sh
 source "$(dirname "$0")/_common.sh"
 
-ceci "$PIPELINE_YAML" "$RUN_YAML" configs/sites/nersc-interactive.yml
+MERGED=$(python3 scripts/merge_configs.py "$PIPELINE_YAML" "$RUN_YAML" configs/sites/nersc-interactive.yml)
+ceci "$MERGED"

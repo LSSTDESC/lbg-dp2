@@ -1,13 +1,14 @@
 # Template pipeline — copy this directory to pipelines/<name>/
 
-python_paths:
-  - stages # Relative path to our custom stages
+# Space-separated list of modules to import so ceci can find the stage classes.
+# Default is just our lbg_stages module, but another common one is txpipe
+modules: lbg_stages
 
 # Config file for this pipeline
 config: configs/pipelines/template/config.yml
 
-# Define all the stages
-# Ceci will use their inputs/outputs to figure out in which order to run them
+# Define all the stages.
+# Ceci will use their inputs/outputs to figure out in which order to run them.
 stages:
   - name: Stage1
   - name: Stage2
