@@ -510,6 +510,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pipeline-configs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline configs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#run-configs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -683,32 +694,57 @@ Each pipeline is a YAML file that declares a directed acyclic graph (DAG) of sta
 <li>a <strong>pipeline</strong> directory under <code>configs/pipelines/</code> that defines the stage DAG and their parameters, and</li>
 <li>a <strong>run</strong> file under <code>configs/runs/</code> that specifies inputs, output locations, and run options.</li>
 </ul>
-<p>Keeping these separate means you can rerun the same pipeline on different inputs (or vice versa).</p>
-<h2 id="run-configs">Run configs</h2>
-<p>Each file in <code>configs/runs/</code> defines one run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">resume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<p>In other words, the pipeline configs are meant to be relatively agnostic to the catalogs you're putting into them, which allows us to use run configs to rerun the same pipeline on many different inputs.</p>
+<h2 id="pipeline-configs">Pipeline configs</h2>
+<p><a href="../configs/pipelines/README.md">List of pipelines</a></p>
+<p>Each file in <code>configs/pipelines/</code> defines one pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Template pipeline — copy this directory to pipelines/&lt;name&gt;/</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/&lt;run&gt;/outputs</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">log_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/&lt;run&gt;/logs</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">inputs</span><span class="p">:</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">fiducial_cosmology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/fiducial_cosmology.yml</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="c1"># add further inputs here</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Space-separated list of modules to import so ceci can find the stage classes.</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Default is just our lbg_stages module, but another common one is txpipe</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">modules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lbg_stages</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Config file for this pipeline</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/pipelines/template/config.yml</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nt">pre_script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nt">post_script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Define all the stages.</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># Ceci will use their inputs/outputs to figure out in which order to run them.</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nt">stages</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Stage1</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Stage2</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="c1"># Add more stages here</span>
+</code></pre></div>
+<h2 id="run-configs">Run configs</h2>
+<p><a href="../configs/runs/README.md">List of runs</a></p>
+<p>Each file in <code>configs/runs/</code> defines one run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Template run config — copy to runs/&lt;name&gt;.yml and fill in the details.</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">resume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w">  </span><span class="c1"># Whether to re-run stages whose outputs already exist</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Location where outputs are saved - REPLACE &lt;run&gt; with the name of the run!</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/&lt;run&gt;/outputs</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">log_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/&lt;run&gt;/logs</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Inputs required to run the stages in the pipeline</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="nt">inputs</span><span class="p">:</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">fiducial_cosmology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/fiducial_cosmology.yml</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="c1"># Add more inputs here</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># These will be run before and after the pipeline respectively</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="nt">pre_script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="nt">post_script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
 </code></pre></div>
 <h2 id="running-a-pipeline">Running a pipeline</h2>
 <p>Three run scripts are provided in <code>scripts/</code>.
 Each takes a pipeline name and a run name as arguments.</p>
 <p><strong>Quick test</strong> (requests a 2-node debug allocation automatically):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
 </code></pre></div>
 <p><strong>Interactive</strong> (use when you already have an <code>salloc</code> allocation):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bash<span class="w"> </span>scripts/run_interactive.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>bash<span class="w"> </span>scripts/run_interactive.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
 </code></pre></div>
 <p><strong>Batch job</strong> (queues a Slurm job; you do not need to stay logged in):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sbatch<span class="w"> </span>scripts/run_batch.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sbatch<span class="w"> </span>scripts/run_batch.sh<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>&lt;run&gt;
 </code></pre></div>
 <p>In all cases <code>&lt;pipeline&gt;</code> is the name of a directory under <code>configs/pipelines/</code>
 and <code>&lt;run&gt;</code> is the name of a <code>.yml</code> file (without the extension) under <code>configs/runs/</code>.</p>
@@ -716,12 +752,12 @@ and <code>&lt;run&gt;</code> is the name of a <code>.yml</code> file (without th
 <ol>
 <li>
 <p>Copy the template directory and edit the stages and config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cp<span class="w"> </span>-r<span class="w"> </span>configs/pipelines/template<span class="w"> </span>configs/pipelines/&lt;pipeline_name&gt;
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># edit configs/pipelines/&lt;pipeline_name&gt;/pipeline.yml and config.yml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cp<span class="w"> </span>-r<span class="w"> </span>configs/pipelines/template<span class="w"> </span>configs/pipelines/&lt;pipeline_name&gt;
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># edit configs/pipelines/&lt;pipeline_name&gt;/pipeline.yml and config.yml</span>
 </code></pre></div>
 </li>
 <li>
-<p>Create a doc page to document the pipeline, including the science intent.</p>
+<p>Add an entry to the <a href="../configs/pipelines/README.md">list of pipelines</a> that documents the pipeline, including the science intent.</p>
 </li>
 </ol>
 <h2 id="adding-a-new-run">Adding a new run</h2>
@@ -732,12 +768,12 @@ Something like <code>&lt;pipeline&gt;_&lt;catalog&gt;</code> is a good option, e
 </li>
 <li>
 <p>Copy the run template and fill in the inputs and output paths:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cp<span class="w"> </span>configs/runs/template.yml<span class="w"> </span>configs/runs/&lt;run_name&gt;.yml
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># edit output_dir, log_dir, and inputs:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cp<span class="w"> </span>configs/runs/template.yml<span class="w"> </span>configs/runs/&lt;run_name&gt;.yml
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># edit output_dir, log_dir, and inputs:</span>
 </code></pre></div>
 </li>
 <li>
-<p>Create a doc page to document the run, including inputs, software versions, and science intent.</p>
+<p>Add an entry to the <a href="../configs/runs/README.md">list of runs</a> that documents the run, including inputs, software versions, and science intent.</p>
 </li>
 </ol>
 
