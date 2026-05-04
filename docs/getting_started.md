@@ -14,6 +14,29 @@ You now have access to the `lbg-env` tool.
 Typing `lbg` in the terminal now provides a shortcut to the LBG project directory, and typing `lbg-env` will activate the latest shared LBG TT python environment.
 You can type `lbg-env help` to see other options provided by this tool, or you can see the README in the [lbg-env GitHub repo](https://github.com/LSSTDESC/lbg-env).
 
+## Repository setup
+
+Create a subdirectory for yourself wherever you wish to work on NERSC.
+We recommend creating a subdirectory in the LBG users space:
+
+```bash
+`/global/cfs/cdirs/lsst/groups/WLSS/LBG/users
+```
+
+Then clone this repo:
+
+```bash
+git clone git@github.com:LSSTDESC/lbg-pipelines.git
+```
+
+Finally, assuming you have already activated the LBG environment (see instructions above), you can install the pre-commit hooks:
+
+```bash
+pre-commit install
+```
+
+Now you're ready to work!
+
 ## Running a pipeline
 
 The simplest way to run a pipeline is with `run_debug.sh`, which requests a
