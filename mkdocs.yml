@@ -1,7 +1,7 @@
-site_name: LBG-DP2
-site_description: DESC LBG topical team — DP2 analysis pipelines and results
-repo_url: https://github.com/LSSTDESC/LBG-DP2
-repo_name: LSSTDESC/LBG-DP2
+site_name: lbg-pipelines
+site_description: DESC LBG topical team — analysis pipelines and results
+repo_url: https://github.com/LSSTDESC/lbg-pipelines
+repo_name: LSSTDESC/lbg-pipelines
 edit_uri: edit/main/docs/
 
 theme:

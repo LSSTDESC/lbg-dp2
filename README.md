@@ -1,7 +1,7 @@
-# DP2 analyses of the DESC LBG TT
+# DESC LBG Topical Team Pipelines
 
-Repo for sharing code related to the LBG TT's DP2 analyses.
+Pipelines and analyses for the DESC Lyman-break galaxy (LBG) topical team.
 
-See [the documentation website](https://lsstdesc.org/lbg-dp2/) for instructions on getting started.
+See [the documentation website](https://lsstdesc.org/lbg-pipelines/) for instructions on getting started.
 
-Location on NERSC: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-dp2`.
+Location on NERSC: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-pipelines`.

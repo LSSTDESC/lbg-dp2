@@ -1,9 +1,9 @@
-# lbg-dp2 — Claude Code guidance
+# lbg-pipelines — Claude Code guidance
 
 ## What this repo is
 
-DP2 analyses for the DESC LBG Topical Team, hosted at NERSC.
-Repo root on CFS: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-dp2`.
+Pipelines and analyses for the DESC LBG Topical Team, hosted at NERSC.
+Repo root on CFS: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-pipelines`.
 Framework: [ceci](https://ceci.readthedocs.io) / [TXPipe](https://txpipe.readthedocs.io) — pipelines are DAGs of stages defined in YAML.
 
 ## Environment
@@ -127,7 +127,7 @@ post_script: ""
 - CPU account: `m1727`; GPU account: `m1727_g`.
 - Constraint: `cpu` (Perlmutter Milan nodes, 128 cores each).
 - Outputs to `results/<run>/outputs`, logs to `results/<run>/logs` — neither tracked in git.
-- Big I/O scratch: `$PSCRATCH`; persistent output: `/global/cfs/cdirs/desc-wl/LBG/lbg-dp2/results/`.
+- Big I/O scratch: `$PSCRATCH`; persistent output: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-pipelines/results/`.
 
 ## Pipelines in this repo
 

@@ -1,8 +1,8 @@
-# LBG-DP2
+# lbg-pipelines
 
-Welcome to the documentation for the **DESC LBG topical team's DP2 analysis**.
+Welcome to the documentation for the **DESC LBG topical team's pipelines and analyses**.
 
-This repository hosts the pipelines, notebooks, and supporting code for our Lyman-break galaxy (LBG) science program using the Rubin Observatory's Data Preview 2 (DP2).
+This repository hosts the pipelines, notebooks, and supporting code for the DESC Lyman-break galaxy (LBG) topical team's science program.
 
 ## Quick links
 
