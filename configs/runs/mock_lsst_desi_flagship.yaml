@@ -1,0 +1,10 @@
+# Run config for mock_lsst_desi_flagship pipeline
+
+resume: False
+
+pipelines: mock_lsst_desi_flagship
+
+output_dir: $LBG_DIR/shared/mock_lsst_desi_flagship/outputs
+log_dir: $LBG_DIR/shared/mock_lsst_desi_flagship/logs
+
+inputs: {}

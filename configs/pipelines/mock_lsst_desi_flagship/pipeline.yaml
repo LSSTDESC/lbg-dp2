@@ -1,0 +1,53 @@
+
+modules: >
+  lbg_stages
+  rail.creation.degraders.photometric_errors
+  rail.creation.degraders.quantityCut
+  rail.creation.degraders.desi_selector_phy
+
+config: configs/pipelines/mock_lsst_desi_flagship/config.yaml
+
+stages:
+  # Reduce the Flagship catalog
+  - name: FlagshipReducer
+
+  # LSST Y1 mocks
+  - name: LsstErrorModelY1
+    classname: LSSTErrorModel
+    aliases:
+      input: flagship_catalog
+      output: lsst_y1_flagship
+  - name: LsstDepthCutY1
+    classname: QuantityCut
+    aliases:
+      input: lsst_y1_flagship
+      output: lsst_y1_flagship_i25p3
+
+  # LSST Y10 mocks
+  - name: LsstErrorModelY10
+    classname: LSSTErrorModel
+    aliases:
+      input: flagship_catalog
+      output: lsst_y10_flagship
+  - name: LsstDepthCutY10
+    classname: QuantityCut
+    aliases:
+      input: lsst_y10_flagship
+      output: lsst_y10_flagship_i26p5
+
+  # DESI mocks
+  - name: DESISelectionBGS
+    classname: SpecSelection_DESI_Phy
+    aliases:
+      input: flagship_catalog
+      output: desi_bgs_flagship
+  - name: DESISelectionLRG
+    classname: SpecSelection_DESI_Phy
+    aliases:
+      input: flagship_catalog
+      output: desi_lrg_flagship
+  - name: DESISelectionELG
+    classname: SpecSelection_DESI_Phy
+    aliases:
+      input: flagship_catalog
+      output: desi_elg_flagship

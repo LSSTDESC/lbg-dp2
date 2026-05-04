@@ -4,6 +4,6 @@
 
 A simple dummy template run
 
-## `reduce_flagship_catalog`
+## `mock_lsst_desi_flagship`
 
-A run to reduce the Flagship simulation pixel files and reduce to a standard catalog of positions, magnitudes, and info required for the DESI spectroscopic selector
+Runs the `mock_lsst_desi_flagship` pipeline on the shared Flagship sims in the PZ working group directory, and stores the outputs in the shared LBG working group directory (`$LBG/shared`).

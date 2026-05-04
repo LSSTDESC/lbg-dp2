@@ -4,6 +4,6 @@
 
 A simple dummy template pipeline, with minimal `pipeline.yaml` and `config.yaml` files
 
-## `reduce_flagship_catalog`
+## `mock_lsst_desi_flagship`
 
-A simple pipeline that loads the Flagship simulation pixel files and reduces to a standard catalog of positions, magnitudes, and info required for the DESI spectroscopic selector
+Pipeline that loads the Flagship catalog and creates mocks for LSST Y1 and Y10 (without non-uniformity; no magnitude cut) and DESI BGS, LRGs, ELGs.

@@ -1,5 +1,0 @@
-
-FlagshipReducer:
-  input_dir: /global/cfs/cdirs/lsst/groups/PZ/Flagship/Roman
-  pixels: [27, 28, 35, 36, 43, 44]
-  file_pattern: "euclid_fs2_mock_dr_v1_1_phz_wNIR.pix{pixel}.pq"

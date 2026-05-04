@@ -1,0 +1,48 @@
+
+# Reduce the Flagship catalog
+FlagshipReducer:
+  input_dir: /global/cfs/cdirs/lsst/groups/PZ/Flagship/Roman
+  pixels: [27, 28, 35, 36, 43, 44]
+  file_pattern: "euclid_fs2_mock_dr_v1_1_phz_wNIR.pix{pixel}.pq"
+
+# LSST Y1 mocks
+LsstErrorModelY1:
+  name: LsstErrorModelY1
+  nYrObs: 1.0
+
+LsstDepthCutY1:
+  name: LsstDepthCutY1
+  cuts:
+    mag_i_lsst: 25.3
+
+# LSST Y10 mocks
+LsstErrorModelY10:
+  name: LsstErrorModelY10
+  nYrObs: 10.0
+
+LsstDepthCutY10:
+  name: LsstDepthCutY10
+  cuts:
+    mag_i_lsst: 26.5
+
+# DESI mocks
+DESISelectionBGS:
+  name: DESISelectionBGS
+  desi_type: "bgs"
+  threshold_col: "lm_halo"
+  redshift_col: "redshift"
+  threshold_table: "/global/cfs/cdirs/lsst/groups/PZ/data/desi_thresholds/bgs_threshold_flagship.parquet"
+
+DESISelectionLRG:
+  name: DESISelectionLRG
+  desi_type: "lrg"
+  threshold_col: "lm_halo"
+  redshift_col: "redshift"
+  threshold_table: "/global/cfs/cdirs/lsst/groups/PZ/data/desi_thresholds/lrg_threshold_flagship.parquet"
+
+DESISelectionELG:
+  name: DESISelectionELG
+  desi_type: "elg"
+  threshold_col: "log_sfr"
+  redshift_col: "redshift"
+  threshold_table: "/global/cfs/cdirs/lsst/groups/PZ/data/desi_thresholds/elg_threshold_flagship.parquet"
