@@ -6,9 +6,9 @@ Direct pushes to `main` are disabled — all changes must go through a pull requ
 
 1. **Open an issue** to discuss a new pipeline, analysis, or bug before writing code.
 This will make it easier to keep everyone up to date on what folks are working on so we don't duplicate work.
-2. **Create a branch** from `main`:
+2. **Create a branch** from `main` that contains the ticket number and a short description:
    ```bash
-   git checkout -b your-name/brief-description
+   git checkout -b issue-#/short-description
    ```
 3. **Make your changes.** See the sections below for conventions.
 4. **Open a pull request** against `main`.
@@ -17,17 +17,17 @@ Use the PR template to describe your changes.
 
 ## Branch naming
 
-Use the pattern `<yourname>/<topic>`, e.g.:
+Use the pattern `issue-#/short-description`, e.g.:
 
 ```
-jfcrenshaw/lbg-selection-cuts
+issue-1/lbg-color-cuts
 ```
 
 ## Pipeline changes
 
 - Place new pipelines under `configs/pipelines/<name>/` (a `pipeline.yml` and a `config.yml`).
 - Add a new run config under `configs/runs/<name>.yml` for any new dataset or run combination.
-- Update `docs/pipelines/index.md` if a new pipeline is added.
+- Update `configs/pipelines/README.md` and/or `configs/runs/README.md` with the description of the new addition.
 - If you add new shared reference files, put them in `configs/`.
 
 ## Notebook conventions
