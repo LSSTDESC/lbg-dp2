@@ -688,8 +688,8 @@
 <ol>
 <li><strong>Open an issue</strong> to discuss a new pipeline, analysis, or bug before writing code.
 This will make it easier to keep everyone up to date on what folks are working on so we don't duplicate work.</li>
-<li><strong>Create a branch</strong> from <code>main</code>:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>your-name/brief-description
+<li><strong>Create a branch</strong> from <code>main</code> that contains the ticket number and a short description:
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>issue-#/short-description
 </code></pre></div></li>
 <li><strong>Make your changes.</strong> See the sections below for conventions.</li>
 <li><strong>Open a pull request</strong> against <code>main</code>.
@@ -697,14 +697,14 @@ Use the PR template to describe your changes.</li>
 <li><strong>Request a review</strong> from at least one other team member before merging.</li>
 </ol>
 <h2 id="branch-naming">Branch naming</h2>
-<p>Use the pattern <code>&lt;yourname&gt;/&lt;topic&gt;</code>, e.g.:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>jfcrenshaw/lbg-selection-cuts
+<p>Use the pattern <code>issue-#/short-description</code>, e.g.:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>issue-1/lbg-color-cuts
 </code></pre></div>
 <h2 id="pipeline-changes">Pipeline changes</h2>
 <ul>
 <li>Place new pipelines under <code>configs/pipelines/&lt;name&gt;/</code> (a <code>pipeline.yml</code> and a <code>config.yml</code>).</li>
 <li>Add a new run config under <code>configs/runs/&lt;name&gt;.yml</code> for any new dataset or run combination.</li>
-<li>Update <code>docs/pipelines/index.md</code> if a new pipeline is added.</li>
+<li>Update <code>configs/pipelines/README.md</code> and/or <code>configs/runs/README.md</code> with the description of the new addition.</li>
 <li>If you add new shared reference files, put them in <code>configs/</code>.</li>
 </ul>
 <h2 id="notebook-conventions">Notebook conventions</h2>
