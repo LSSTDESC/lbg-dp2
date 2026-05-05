@@ -9,10 +9,28 @@ from rail.projects.reducer import FlagshipReducer as RailFlagshipReducer
 class FlagshipReducer(RailStage):
     """Load Flagship simulation pixel files and reduce to a standard catalog.
 
-    Wraps FlagshipReducer from rail_projects to convert raw per-pixel parquet
-    files (flux columns, Flagship coordinate convention) into a reduced catalog
-    with AB magnitudes and standard ra/dec.  The output is a single parquet
-    file suitable for downstream RAIL degradation stages.
+    Wraps ``FlagshipReducer`` from ``rail_projects`` to convert raw per-pixel
+    parquet files (flux columns, Flagship coordinate convention) into a reduced
+    catalog with AB magnitudes and standard ra/dec.
+    The output is a single parquet file suitable for downstream RAIL
+    degradation stages.
+
+    Parameters
+    ----------
+    input_dir : str
+        Directory containing Flagship pixel parquet files (wNIR).
+        Default: ``/global/cfs/cdirs/lsst/groups/PZ/Flagship/Roman``.
+    pixels : list of int
+        HEALPix pixel IDs to load.
+        Default: ``[27, 28, 35, 36, 43, 44]``.
+    file_pattern : str
+        Filename template; ``{pixel}`` is substituted with each pixel ID.
+        Default: ``euclid_fs2_mock_dr_v1_1_phz_wNIR.pix{pixel}.pq``.
+    cuts : dict
+        Column cuts forwarded to the underlying ``FlagshipReducer``.
+        Each key is a column name and each value is a ``[min, max]`` pair
+        (``None`` means no bound).
+        Default: ``{"maglim_i": [None, 99.0]}``.
     """
 
     name = "FlagshipReducer"
@@ -45,6 +63,7 @@ class FlagshipReducer(RailStage):
     )
 
     def run(self):
+        """Read pixel files and write the reduced catalog to the output path."""
         pixel_files = [
             os.path.join(
                 self.config.input_dir,
