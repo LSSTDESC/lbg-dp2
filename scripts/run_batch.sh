@@ -35,5 +35,5 @@
 # shellcheck source=_common.sh
 source "$(dirname "$0")/_common.sh"
 
-MERGED=$(python3 scripts/merge_configs.py "$RUN_YAML" configs/sites/nersc-batch.yml)
+MERGED=$(python3 scripts/merge_configs.py "$RUN_YAML" configs/sites/nersc-batch.yaml)
 ceci "$MERGED" "${@:2}"

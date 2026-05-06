@@ -15,6 +15,6 @@ RUN=${1:?Usage: $_SCRIPT <run>}
 # YAML files resolve correctly.
 cd "$(cd "$(dirname "${BASH_SOURCE[1]}")" && pwd)/.."
 
-RUN_YAML=configs/runs/$RUN.yml
+RUN_YAML=configs/runs/$RUN.yaml
 
 [[ -f "$RUN_YAML" ]] || { echo "$_SCRIPT: run config not found: $RUN_YAML" >&2; exit 1; }
