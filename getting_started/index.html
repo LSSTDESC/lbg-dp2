@@ -655,34 +655,37 @@
 
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="environment-setup">Environment setup</h2>
-<p>First setup the <code>lbg-env</code> tool by adding the following to your <code>~/.bashrc.ext</code> (or <code>~/.zshrc.ext</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">source</span><span class="w"> </span>/global/common/software/m1727/groups/WLSS/LBG/lbg-env/scripts/setup_lbg_env.sh
+<p>First create a subdirectory for yourself in the LBG users space:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>/global/cfs/cdirs/lsst/groups/WLSS/LBG/users/<span class="nv">$USER</span>
+</code></pre></div></p>
+<p>Next setup the <code>lbg-env</code> tool by adding the following to your <code>~/.bashrc.ext</code> (or <code>~/.zshrc.ext</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span>/global/common/software/m1727/groups/WLSS/LBG/lbg-env/scripts/setup_lbg_env.sh
 </code></pre></div>
-<p>Then either start a new shell or re-source your <code>~/.bashrc.ext</code>/<code>~/.zshrc.ext</code> to pick up the change.
-You now have access to the <code>lbg-env</code> tool.</p>
-<p>Typing <code>lbg</code> in the terminal now provides a shortcut to the LBG project directory, and typing <code>lbg-env</code> will activate the latest shared LBG TT python environment.
-You can type <code>lbg-env help</code> to see other options provided by this tool, or you can see the README in the <a href="https://github.com/LSSTDESC/lbg-env">lbg-env GitHub repo</a>.</p>
+<p>Then either start a new shell or re-source your <code>~/.bashrc.ext</code>/<code>~/.zshrc.ext</code> to pick up the change.</p>
+<p>You now have access to the <code>lbg-env</code> tool.
+This tool provides a number of useful abilities, which you can read about by either running <code>lbg-env help</code> or going to the <a href="https://github.com/LSSTDESC/lbg-env">lbg-env docs</a>.
+For most people, however, typical usage will likely be</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lbgu<span class="w">        </span><span class="c1"># go to your LBG user directory</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>lbg-env<span class="w">     </span><span class="c1"># activate the latest LBG python environment</span>
+</code></pre></div>
+<p>You may also wish to run <code>lbg-env setup-jupyter</code> to install a Jupyter kernel for the activated environment which you can use in the online portal.</p>
 <h2 id="repository-setup">Repository setup</h2>
-<p>Create a subdirectory for yourself wherever you wish to work on NERSC.
-We recommend creating a subdirectory in the LBG users space:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="sb">`</span>/global/cfs/cdirs/lsst/groups/WLSS/LBG/users
+<p>Go to your subdirectory in the LBG users space and clone this repo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lbgu
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:LSSTDESC/lbg-pipelines.git
 </code></pre></div>
-<p>Then clone this repo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:LSSTDESC/lbg-pipelines.git
-</code></pre></div>
-<p>Finally, assuming you have already activated the LBG environment (see instructions above), you can install the pre-commit hooks:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pre-commit<span class="w"> </span>install
+<p>Finally you can install the pre-commit hooks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pre-commit<span class="w"> </span>install
 </code></pre></div>
 <p>Now you're ready to work!</p>
 <h2 id="running-a-pipeline">Running a pipeline</h2>
 <p>The simplest way to run a pipeline is with <code>run_debug.sh</code>, which requests a
 short debug allocation automatically and runs the pipeline inside it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;run&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>bash<span class="w"> </span>scripts/run_debug.sh<span class="w"> </span>&lt;run&gt;
 </code></pre></div>
 <p>where <code>&lt;run&gt;</code> is the name of a file (without the <code>.yml</code> extension) under <code>configs/runs/</code>.
-The pipeline(s) to execute are specified by the <code>pipelines:</code> key inside that run config.</p>
-<p>See <a href="pipelines/index.md">Pipelines</a> for a full description of each pipeline and instructions
-for creating run configs.</p>
+The pipeline(s) to execute are specified by the <code>pipelines:</code> key inside that run config.
+See <a href="../stages_pipelines_runs/">Stages, Pipelines, and Runs</a> for more info.</p>
 <h2 id="contributing">Contributing</h2>
 <p>To contribute to this project, see the instructions in <a href="../contributing/">Contributing</a></p>
 
