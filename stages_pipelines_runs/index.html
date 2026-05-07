@@ -693,7 +693,7 @@ Each new pipeline receives its own subdirectory which contains a <code>pipeline.
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">modules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lbg_stages</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Config file for this pipeline</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/pipelines/template/config.yml</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/pipelines/template/config.yaml</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Define all the stages.</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Ceci will use their inputs/outputs to figure out in which order to run them.</span>
@@ -716,7 +716,7 @@ Each new pipeline receives its own subdirectory which contains a <code>pipeline.
 <h2 id="runs">Runs</h2>
 <p>Runs are defined via <code>yaml</code> files in the <code>configs/runs/</code> directory, with each run receiving a <code>yaml</code> file named <code>&lt;pipeline&gt;_&lt;catalog&gt;</code>.</p>
 <p>Here is a template run config:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Template run config — copy to runs/&lt;name&gt;.yml and fill in the details.</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Template run config — copy to runs/&lt;name&gt;.yaml and fill in the details.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">resume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w">  </span><span class="c1"># Whether to re-run stages whose outputs already exist</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -733,7 +733,7 @@ Each new pipeline receives its own subdirectory which contains a <code>pipeline.
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># Inputs required to run the stages in the pipeline</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="nt">inputs</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="nt">fiducial_cosmology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/fiducial_cosmology.yml</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="nt">fiducial_cosmology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configs/fiducial_cosmology.yaml</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># These will be run before and after the pipeline respectively</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nt">pre_script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
