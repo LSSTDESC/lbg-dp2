@@ -35,7 +35,7 @@ class FlagshipReducer(RailStage):
 
     name = "FlagshipReducer"
     inputs = []
-    outputs = [("output_catalog", PqHandle)]
+    outputs = [("flagship_catalog", PqHandle)]
     config_options = RailStage.config_options.copy()
     config_options.update(
         dict(

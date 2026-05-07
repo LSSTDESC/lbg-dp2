@@ -52,7 +52,7 @@ short debug allocation automatically and runs the pipeline inside it:
 bash scripts/run_debug.sh <run>
 ```
 
-where `<run>` is the name of a file (without the `.yml` extension) under `configs/runs/`.
+where `<run>` is the name of a file (without the `.yaml` extension) under `configs/runs/`.
 The pipeline(s) to execute are specified by the `pipelines:` key inside that run config.
 See [Stages, Pipelines, and Runs](stages_pipelines_runs.md) for more info.
 

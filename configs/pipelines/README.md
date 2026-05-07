@@ -2,7 +2,7 @@
 
 ## `template`
 
-A simple dummy template pipeline, with minimal `pipeline.yml` and `config.yml` files
+A simple dummy template pipeline, with minimal `pipeline.yaml` and `config.yaml` files
 
 ## `reduce_flagship_catalog`
 

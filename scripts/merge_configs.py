@@ -19,6 +19,7 @@ Prints the path to the merged YAML so callers can do:
     ceci "$MERGED"
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -27,7 +28,7 @@ import yaml
 
 def load_yaml(path):
     with open(path) as fh:
-        return yaml.safe_load(fh) or {}
+        return yaml.safe_load(os.path.expandvars(fh.read())) or {}
 
 
 def merge_pipelines(pipeline_names, pipelines_dir):
