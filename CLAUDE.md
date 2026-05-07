@@ -29,8 +29,7 @@ configs/
 │   ├── README.md                 # list of all runs
 │   └── <name>.yaml               # inputs, output_dir, log_dir, resume flag
 └── sites/
-    ├── nersc-interactive.yaml    # launcher: mini, max_threads: 128
-    └── nersc-batch.yaml          # launcher: parsl, Perlmutter CPU, m1727
+    └── nersc.yaml                # launcher: mini, site: local, max_threads: 128
 lbg_stages/                       # custom ceci PipelineStage subclasses
 results/                          # pipeline outputs (not tracked in git)
 scripts/

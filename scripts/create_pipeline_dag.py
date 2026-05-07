@@ -16,7 +16,7 @@ Arguments
 Options
 -------
 --site YAML
-    Site config to use when merging (default: configs/sites/nersc-interactive.yaml).
+    Site config to use when merging (default: configs/sites/nersc.yaml).
 """
 
 import argparse
@@ -48,7 +48,7 @@ def main():
     )
     parser.add_argument(
         "--site",
-        default="configs/sites/nersc-interactive.yaml",
+        default="configs/sites/nersc.yaml",
         help="Site YAML to use when merging configs",
     )
     args = parser.parse_args()

@@ -59,6 +59,7 @@ nav:
   - Home: index.md
   - Getting Started: getting_started.md
   - Stages, Pipelines, Runs: stages_pipelines_runs.md
+  - Scripts: scripts.md
   - Notebooks: notebooks.md
   - Data: data.md
   - Contributing: contributing.md
