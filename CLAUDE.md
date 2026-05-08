@@ -3,7 +3,6 @@
 ## What this repo is
 
 Pipelines and analyses for the DESC LBG Topical Team, hosted at NERSC.
-Repo root on CFS: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-pipelines`.
 Framework: [ceci](https://ceci.readthedocs.io) / [TXPipe](https://txpipe.readthedocs.io) — pipelines are DAGs of stages defined in YAML.
 
 ## Environment
@@ -14,35 +13,6 @@ lbg-env   # requires setup_lbg_env.sh sourced in ~/.bashrc.ext or ~/.zshrc.ext
 ```
 
 The `lbg` command is a shortcut to the repo root.
-
-## Directory layout
-
-```
-configs/
-├── fiducial_cosmology.yaml       # shared ΛCDM reference parameters
-├── pipelines/
-│   ├── README.md                 # list of all pipelines
-│   └── <name>/
-│       ├── pipeline.yaml         # stage DAG + modules + config pointer
-│       └── config.yaml           # per-stage hyperparameters
-├── runs/
-│   ├── README.md                 # list of all runs
-│   └── <name>.yaml               # inputs, output_dir, log_dir, resume flag
-└── sites/
-    └── nersc.yaml                # launcher: mini, site: local, max_threads: 128
-lbg_stages/                       # custom ceci PipelineStage subclasses
-results/                          # pipeline outputs (not tracked in git)
-scripts/
-├── _common.sh                    # shared arg parsing + cd-to-root logic
-├── create_pipeline_dag.py        # render ceci DAG to PNG or .dot for a run
-├── generate_test_certificate.sh  # run pytest and print a signed certificate
-├── merge_configs.py              # merges pipeline + run + site YAMLs for ceci
-├── run_debug.sh                  # auto-requests debug alloc; 2 nodes
-├── run_interactive.sh            # use inside existing salloc; supports --dry-run
-└── run_batch.sh                  # sbatch; 4 nodes, regular queue, m1727
-tests/
-└── test_dry_runs.py              # parametrized dry-run smoke test for all runs
-```
 
 ## Running a pipeline
 
@@ -75,47 +45,13 @@ The run scripts work around this by merging all pipeline YAMLs, the run config, 
 Use `modules:` (space-separated, top-level key) to import stage modules — this is what registers stage classes with ceci.
 `python_paths:` is not needed because ceci adds CWD to `sys.path` automatically.
 
-## Pipeline YAML conventions
-
-**pipeline.yaml** skeleton:
-```yaml
-modules: lbg_stages
-
-config: configs/pipelines/<name>/config.yaml
-
-stages:
-  - name: SomeStage
-  - name: AnotherStage
-```
-
-**config.yaml** skeleton — one block per stage name, empty `{}` until params are known:
-```yaml
-SomeStage:
-  param1: value
-
-AnotherStage:
-  {}
-```
-
-**run config** skeleton:
-```yaml
-resume: False
-pipelines: <pipeline-name>   # or a list of names
-output_dir: results/<run>/outputs
-log_dir: results/<run>/logs
-inputs:
-  fiducial_cosmology: configs/fiducial_cosmology.yaml
-pre_script: ""
-post_script: ""
-```
-
 ## Adding a new pipeline checklist
 
 1. `cp -r configs/pipelines/template configs/pipelines/<name>`
 2. Edit `pipeline.yaml` (stages) and `config.yaml` (params).
 3. Create `configs/runs/<run>.yaml`.
 4. Add an entry to `configs/pipelines/README.md` and `configs/runs/README.md`.
-5. Update `docs/pipelines.md`.
+5. Update `docs/list_of_pipelines.md` (auto-includes from `configs/pipelines/README.md`).
 6. Verify with `bash scripts/generate_test_certificate.sh`.
 
 ## Git / contribution conventions
@@ -131,11 +67,8 @@ post_script: ""
 - CPU account: `m1727`; GPU account: `m1727_g`.
 - Constraint: `cpu` (Perlmutter Milan nodes, 128 cores each).
 - Outputs to `results/<run>/outputs`, logs to `results/<run>/logs` — neither tracked in git.
-- Big I/O scratch: `$PSCRATCH`; persistent output: `/global/cfs/cdirs/lsst/groups/WLSS/LBG/lbg-pipelines/results/`.
+- Big I/O scratch: `$PSCRATCH`; persistent output: CFS under the shared LBG group directory.
 
 ## Pipelines in this repo
 
-| Pipeline | Run config(s) | Description |
-|---|---|---|
-| `reduce_flagship_catalog` | `reduce_flagship_catalog` | Flagship pixel files → positions, magnitudes, DESI selector inputs |
-| `mock_desi` | `mock_desi_flagship` | Flagship catalog → DESI selector → LSSTErrorModel → i<25 cut |
+See `configs/pipelines/README.md`.
