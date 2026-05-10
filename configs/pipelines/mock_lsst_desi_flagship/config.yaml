@@ -9,6 +9,13 @@ FlagshipReducer:
 LsstErrorModelY1:
   name: LsstErrorModelY1
   nYrObs: 1.0
+  renameDict:
+    u: mag_u_lsst
+    g: mag_g_lsst
+    r: mag_r_lsst
+    i: mag_i_lsst
+    z: mag_z_lsst
+    y: mag_y_lsst
 
 LsstDepthCutY1:
   name: LsstDepthCutY1
@@ -19,6 +26,13 @@ LsstDepthCutY1:
 LsstErrorModelY10:
   name: LsstErrorModelY10
   nYrObs: 10.0
+  renameDict:
+    u: mag_u_lsst
+    g: mag_g_lsst
+    r: mag_r_lsst
+    i: mag_i_lsst
+    z: mag_z_lsst
+    y: mag_y_lsst
 
 LsstDepthCutY10:
   name: LsstDepthCutY10
